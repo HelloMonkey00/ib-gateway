@@ -4,6 +4,7 @@ FROM ubuntu:20.04
 ENV VNC_LISTEN_ADDRESS=127.0.0.1
 ENV VNC_PASSWORD_FILE=/etc/vnc_password
 ENV IB_GATEWAY_MAX_MEMORY=1024m
+ENV VNC_PORT=5901
 
 # 安装必要的软件包
 RUN apt-get update && apt-get install -y \
