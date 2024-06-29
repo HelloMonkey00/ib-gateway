@@ -1,10 +1,9 @@
 FROM ubuntu:20.04
 
 # 设置环境变量
-ENV PATH=$PATH:$JAVA_HOME/bin
 ENV VNC_LISTEN_ADDRESS=127.0.0.1
 ENV VNC_PASSWORD_FILE=/etc/vnc_password
-ENV IB_GATEWAY_MAX_MEMORY=2048m
+ENV IB_GATEWAY_MAX_MEMORY=1024m
 
 # 安装必要的软件包
 RUN apt-get update && apt-get install -y \
@@ -24,9 +23,6 @@ RUN wget -O /tmp/ibgateway-stable-standalone-linux-x64.sh https://download2.inte
 RUN chmod +x /tmp/ibgateway-stable-standalone-linux-x64.sh \
     && expect /tmp/install_ibgateway.exp \
     && rm /tmp/ibgateway-stable-standalone-linux-x64.sh /tmp/install_ibgateway.exp
-
-# 修改启动脚本
-RUN sed -i 's/^Xmx768m/Xmx$IB_GATEWAY_INITIAL_MEMORY/' /root/Jts/ibgateway/1019/ibgateway.vmoptions
 
 # 生成随机VNC密码并保存到只读文件
 RUN pwgen -s 20 1 > $VNC_PASSWORD_FILE \
