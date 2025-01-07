@@ -4,7 +4,7 @@ set timeout -1
 
 spawn /tmp/ibgateway-stable-standalone-linux-x64.sh
 
-expect "/root/Jts/ibgateway/1019"
+expect "/root/Jts/ibgateway/"
 send "\r"
 
 expect "n, Enter"
